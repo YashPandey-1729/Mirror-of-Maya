@@ -1,3 +1,5 @@
+/////////FOR MID EVAL.////
+
 import os
 import torch
 import clip
@@ -87,5 +89,6 @@ transformed_folder = "datasets/copydays/transformed"
 copydays_db = build_database(original_folder)
 
 results = find_duplicates(transformed_folder, copydays_db, threshold=0.75)
+
 
 print(f"\nTotal near-duplicates found: {len(results)}")
