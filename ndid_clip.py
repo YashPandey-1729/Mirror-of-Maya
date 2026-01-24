@@ -218,7 +218,7 @@ trans_folder=build_database(transformed_folder)
 # print(f"\nTotal near-duplicates found: {len(results)}")
 # remove_duplicate_images("datasets/copydays/original", threshold=0.95)
 
-search_different("datasets/landmarks/test.jpg",copydays_db, top_k=1)
+search_different("datasets/landmarks/test.jpg",copydays_db, top_k=3)
 
 store_if_unique("datasets/landmarks/test.jpg", copydays_db)
 
@@ -237,3 +237,4 @@ p,r,f1=compute_f1(results,ground_truth)
 
 
 print("F1:",f1)
+
