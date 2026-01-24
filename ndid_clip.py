@@ -124,17 +124,17 @@ def search_different(query_image, embeddings_db, top_k=5, diversity_threshold=0.
     # Step 1: Compute similarity with all images
     for stored_path, stored_emb in embeddings_db.items():
         sim = cosine_similarity([query_emb], [stored_emb])[0][0]
-        if(sim>0.999):
+        if(sim==1):
             continue
         scores.append((stored_path, sim))
 
     # Step 2: Sort (low → high similarity)
-    scores = sorted(scores, key=lambda x: x[1])
+    scores = sorted(scores, key=lambda x: x[1],reverse=True)
 
     # Step 3: Pick top results but remove near-duplicates among them
     selected = []
 
-    for path, sim in scores[-top_k:]:   # take highest similarity ones
+    for path, sim in scores[:top_k]:   # take highest similarity ones
         keep = True
         sim_between=sim
         for sel_path, _ in selected:
@@ -234,5 +234,6 @@ ground_truth = {
 results = find_duplicates("datasets/copydays/test",copydays_db, threshold=0.75)
 
 p,r,f1=compute_f1(results,ground_truth)
+
 
 print("F1:",f1)
